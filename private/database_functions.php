@@ -1,22 +1,5 @@
-<?php
-// Creates and returns a mysqli database connection object
 function db_connect() {
-	$database = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);  // create the object $connection
-	confirm_db_connect($database);
-	return $database; // the function returns the object $connection
+    $database = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME, DB_PORT);
+    confirm_db_connect($database);
+    return $database;
 }
-
-// Confirms whether the connection succeeded or failed
-function confirm_db_connect($database) {
-	if ($database->connect_errno == 0) {
-		// echo "Connection to DB succeed. <br>";  
-	}
-	if ($database->connect_errno > 0) {
-		$msg  = "Database connection failed: ";
-		$msg .= $database->connect_error;
-		$msg .= " (" . $database->connect_errno . ")";
-		echo $msg;
-		echo "<br>";
-	}
-}
-?>
