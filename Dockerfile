@@ -1,12 +1,11 @@
-FROM php:8.2-apache
+FROM php:8.2-cli
 
 RUN docker-php-ext-install mysqli
 
-COPY public/ /var/www/html/
-COPY private/ /var/www/private/
+COPY . /app
 
-RUN sed -i 's/80/80/g' /etc/apache2/ports.conf && \
-    echo "ServerName localhost" >> /etc/apache2/apache2.conf && \
-    a2enmod rewrite
+WORKDIR /app
 
-EXPOSE 80
+CMD ["php", "-S", "0.0.0.0:8080", "-t", "public"]
+
+EXPOSE 8080
